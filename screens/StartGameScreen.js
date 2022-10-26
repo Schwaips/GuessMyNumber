@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginHorizontal: 24,
     marginTop: 100,
-    backgroundColor: "#4e0329",
+    backgroundColor: "#500028",
     borderRadius: 8,
     elevation: 4, // android only
     shadowColor: "black",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 32,
     borderBottomColor: "#ddb52f",
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
     color: "#ddb52f",
     marginVertical: 8,
     fontWeight: "bold",
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-  }
+  },
 });
 
 export default StartGameScreen;
