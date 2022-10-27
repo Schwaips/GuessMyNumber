@@ -5,6 +5,7 @@ import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
 // exclude so that phone can't guess the number at first guess.
 function generateRandomBetween(min, max, exclude) {
@@ -64,7 +65,7 @@ function GameScreen({ userNumber, onGameOver }) {
       <Title>Opponent's guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
-        <Text>Higher or lower</Text>
+        <InstructionText>Higher or lower ?</InstructionText>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
             -
