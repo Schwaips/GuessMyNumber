@@ -1,12 +1,29 @@
 import { Text, View, StyleSheet } from "react-native";
+import { useState } from "react";
 
-import Title from "../components/Title";
+import Title from "../components/ui/Title";
+// exclude so that phone can't guess the number at first guess.
+function generateRandomBetween(min, max, exclude) {
+  const randomNumber = Math.floor(Math.random() * (max - min)) + min;
 
-function GameScreen() {
+  if (randomNumber === exclude) {
+    return generateRandomBetween(min, max, exclude);
+  } else {
+    return randomNumber;
+  }
+}
+
+
+function GameScreen({userNumber}) {
+  // generate first guess
+  const initialGuess = generateRandomBetween(1, 100, userNumber);
+  // update guess
+  const [currentGuess, setcurrentGuess] = useState(initialGuess);
+
   return (
     <View style={styles.screen}>
       <Title>Opponent's guess</Title>
-      {/* GUESS */}
+
       <View>
         <Text>Higher or lower</Text>
         {/* + - */}
