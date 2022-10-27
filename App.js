@@ -6,22 +6,39 @@ import { LinearGradient } from "expo-linear-gradient";
 import Colors from "./constants/colors";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
+// import GameOverScreen from "/screens/GameOverScreen";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
+  const [gameIsOver, setgameIsOver] = useState(true);
 
-  function pickedNumberHandler(pickedNumber){
+  function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
+    setgameIsOver(false);
   }
 
-  let screen = <StartGameScreen onPickNumber={pickedNumberHandler}/>;
+  function GameOverHandler() {
+    setgameIsOver(true);
+  }
+
+  let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} />
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={GameOverHandler} />
+    );
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />;
   }
 
   return (
-    <LinearGradient colors={[Colors.primary900, Colors.accent500]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.primary900, Colors.accent500]}
+      style={styles.rootScreen}
+    >
       <ImageBackground
         source={require("./assets/images/background.png")}
         resizeMode="cover"
@@ -39,6 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    opacity: 0.15
-  }
+    opacity: 0.15,
+  },
 });
