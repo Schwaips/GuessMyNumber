@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Card from "../components/ui/Card";
 
 // exclude so that phone can't guess the number at first guess.
 function generateRandomBetween(min, max, exclude) {
@@ -21,11 +22,7 @@ let maxBoundary = 100;
 
 function GameScreen({ userNumber, onGameOver }) {
   // generate first guess of computer
-  const initialGuess = generateRandomBetween(
-    1,
-    100,
-    userNumber
-  );
+  const initialGuess = generateRandomBetween(1, 100, userNumber);
   // update guess for computer
   const [currentGuess, setcurrentGuess] = useState(initialGuess);
 
@@ -66,7 +63,7 @@ function GameScreen({ userNumber, onGameOver }) {
     <View style={styles.screen}>
       <Title>Opponent's guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
+      <Card>
         <Text>Higher or lower</Text>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
@@ -76,7 +73,7 @@ function GameScreen({ userNumber, onGameOver }) {
             +
           </PrimaryButton>
         </View>
-      </View>
+      </Card>
       <View></View>
       {/* <View>LOG ROUNDS</View> */}
     </View>
@@ -89,10 +86,10 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    minWidth: 13,
+    // flexDirection: "row",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // minWidth: 13,
   },
 });
 
