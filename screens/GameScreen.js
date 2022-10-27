@@ -35,6 +35,13 @@ function GameScreen({ userNumber, onGameOver }) {
     // when this effect is done
   }, [currentGuess, userNumber, onGameOver]);
 
+  // will not execute if the component was already on UI.
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
+
+
   // When you click on + or min direction is either lower or greater number
   function nextGuessHandler(direction) {
     if (
