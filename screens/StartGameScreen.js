@@ -69,10 +69,10 @@ function StartGameScreen({ onPickNumber }) {
 }
 
 const styles = StyleSheet.create({
-  rootContainer:{
+  rootContainer: {
     flex: 1,
     marginTop: 100,
-    alignItems: 'center'
+    alignItems: "center",
   },
   numberInput: {
     height: 50,
