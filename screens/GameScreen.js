@@ -108,7 +108,6 @@ function GameScreen({ userNumber, onGameOver }) {
   );
 
   if (width > 500) {
-    console.log("width less than 500");
     content = (
       <>
         {/* <InstructionText style={styles.instructionText}>
