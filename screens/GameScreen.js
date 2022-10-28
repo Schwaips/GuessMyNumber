@@ -73,6 +73,8 @@ function GameScreen({ userNumber, onGameOver }) {
     setguessRounds((prevGuessRounds) => [newRandomNumber, ...prevGuessRounds]);
   }
 
+  const guessRoundListLenght = guessRounds.length;
+
   return (
     <View style={styles.screen}>
       <Title>Opponent's guess</Title>
@@ -101,9 +103,10 @@ function GameScreen({ userNumber, onGameOver }) {
         <FlatList
           data={guessRounds}
           renderItem={(itemData) => (
-            <RoundGuessLabel guessNumber={itemData.item} />
+            <RoundGuessLabel roundNumber={guessRoundListLenght - itemData.index} guess={itemData.item} />
           )}
           keyExtractor={(item) => item}
+          style={styles.roundLabelContainer}
         />
       </View>
     </View>
@@ -124,6 +127,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
+  roundLabelContainer: {
+    marginTop: 8
+  }
 });
 
 export default GameScreen;
