@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Text } from "react-native";
 import { useState, useEffect } from "react";
 
 import Title from "../components/ui/Title";
@@ -6,7 +6,7 @@ import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from "@expo/vector-icons";
 
 // exclude so that phone can't guess the number at first guess.
 function generateRandomBetween(min, max, exclude) {
@@ -27,6 +27,8 @@ function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   // update guess for computer
   const [currentGuess, setcurrentGuess] = useState(initialGuess);
+  // number of guess rounds
+  const [guessRounds, setguessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -40,7 +42,6 @@ function GameScreen({ userNumber, onGameOver }) {
     minBoundary = 1;
     maxBoundary = 100;
   }, []);
-
 
   // When you click on + or min direction is either lower or greater number
   function nextGuessHandler(direction) {
@@ -66,6 +67,11 @@ function GameScreen({ userNumber, onGameOver }) {
       currentGuess
     );
     setcurrentGuess(newRandomNumber);
+    // add newRandomNumber to it. 3 dots in array, so that we keep the data already in the array.
+    // newRandomNumber is added first so that when we iterate into it, we got the lastest guess first.
+    setguessRounds(
+      (prevGuessRounds) => [newRandomNumber, ...prevGuessRounds],
+    );
   }
 
   return (
@@ -89,7 +95,11 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View></View>
+      <View>
+        {guessRounds.map((guessRound) => (
+          <Text key={guessRound}>{guessRound}</Text>
+        ))}
+      </View>
       {/* <View>LOG ROUNDS</View> */}
     </View>
   );
@@ -106,7 +116,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: "row",
   },
-  buttonContainer:{
+  buttonContainer: {
     flex: 1,
   },
 });
