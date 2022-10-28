@@ -15,7 +15,7 @@ function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
 
   let imageSize = 300;
   if (width < 380) {
-    imageSize = 350;
+    imageSize = 250;
   }
 
   if (height < 400) {
@@ -63,9 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   imageContainer: {
-    // width: deviceWidth < 380 ? 150 : 300,
-    // height: deviceWidth < 380 ? 150 : 300,
-    // borderRadius: deviceWidth < 380 ? 75 : 150,
     borderWidth: 3,
     borderColor: Colors.primary800,
     overflow: "hidden",
