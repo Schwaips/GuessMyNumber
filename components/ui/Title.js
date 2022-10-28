@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'white',
     borderRadius: 8,
+    // maxWidth refers to parent container that holds the title.
+    maxWidth: '80%',
+    width: 300
   },
 });
 export default Title;
