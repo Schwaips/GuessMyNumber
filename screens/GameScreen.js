@@ -1,12 +1,13 @@
-import { View, StyleSheet, Alert, Text } from "react-native";
+import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
 import { useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
-import { Ionicons } from "@expo/vector-icons";
+import RoundGuessLabel from "../components/game/RoundGuessLabel";
 
 // exclude so that phone can't guess the number at first guess.
 function generateRandomBetween(min, max, exclude) {
@@ -69,9 +70,7 @@ function GameScreen({ userNumber, onGameOver }) {
     setcurrentGuess(newRandomNumber);
     // add newRandomNumber to it. 3 dots in array, so that we keep the data already in the array.
     // newRandomNumber is added first so that when we iterate into it, we got the lastest guess first.
-    setguessRounds(
-      (prevGuessRounds) => [newRandomNumber, ...prevGuessRounds],
-    );
+    setguessRounds((prevGuessRounds) => [newRandomNumber, ...prevGuessRounds]);
   }
 
   return (
@@ -96,11 +95,17 @@ function GameScreen({ userNumber, onGameOver }) {
         </View>
       </Card>
       <View>
-        {guessRounds.map((guessRound) => (
+        {/* {guessRounds.map((guessRound) => (
           <Text key={guessRound}>{guessRound}</Text>
-        ))}
+        ))} */}
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <RoundGuessLabel guessNumber={itemData.item} />
+          )}
+          keyExtractor={(item) => item}
+        />
       </View>
-      {/* <View>LOG ROUNDS</View> */}
     </View>
   );
 }
